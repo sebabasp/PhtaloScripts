@@ -1,0 +1,91 @@
+&CONTROL
+    calculation='vc-relax'
+    prefix='Mn'
+    restart_mode = 'from_scratch'
+    verbosity='high'
+    nstep=1000
+    outdir='./tmp'
+    pseudo_dir='./'
+    forc_conv_thr=1.0d-5
+    etot_conv_thr=1.0d-6
+
+/
+&SYSTEM
+    ibrav=0 !Damos la geometria en CELL_PARAMETERS
+    nat = 33 !Número de atomos
+    ntyp = 4 !Número de los tipos de átomos 
+    ecutwfc = 60.0 !La energia cinética de corte para las ondas planas
+    occupations = 'smearing'
+    smearing = 'gauss'
+    degauss = 0.002
+    nbnd=95 !Es la mitad de electrones más 20%
+    nspin=2
+    starting_magnetization(4) = 0.5
+    !------ input_dft='pbe0' !Añadimos la parte híbrida al cálculo
+    !------ nqx1 = 1, nqx2= 1, nqx3 = 1 !El grid de la parte híbrida
+    nosym=.true. !Sin simetría para no tener problemas en la zona de Brillouin
+    vdw_corr='dft-d3' !Añadimos correcciones de Fuerzas Débiles
+    dftd3_version=6 
+
+/
+&ELECTRONS
+    mixing_beta = 0.7 !Es default
+    conv_thr =  1.0d-8 !El default es 1.0d-6
+    electron_maxstep= 500 !El normal es 100, pero le ponemos hasta 500
+    mixing_mode = 'plain' !Default ya que no sabemos si es homogeneo o inhomogeneo el sistema
+/
+&IONS
+
+/
+&CELL
+cell_dofree='2Dxy'
+
+/
+CELL_PARAMETERS angstrom
+    10.6773   0.00000   0.00000
+    0.00000   10.6773   0.00000
+    0.00000   0.00000   14.0000
+ATOMIC_SPECIES
+N  14.0100000 N.pbe-n-rrkjus_psl.1.0.0.UPF !Pseudos tipo PAW US
+C  12.8100000 C.pbe-n-rrkjus_psl.1.0.0.UPF
+H   1.0079700 H.pbe-rrkjus_psl.1.0.0.UPF
+Mn 54.9380440 Mn.pbe-spn-rrkjus_psl.0.3.1.UPF
+
+ATOMIC_POSITIONS angstrom
+Mn           -0.0015593842       -0.0013921529        6.9999934915
+C             6.5207252932        9.9690571706        6.9999999618
+C             4.1646726460        9.9677596095        7.0000034986
+C             2.7690253354        9.5566596553        6.9999996389
+C             7.9134056610        9.5600809330        6.9999944345
+C             5.3421460053        9.2258726837        7.0000023502
+N             0.0045290687        8.7161728886        6.9999932711
+N             2.3956815226        8.2843535748        6.9999993584
+N             8.2890880892        8.2892162217        6.9999924200
+H             5.3425930943        8.1374588074        7.0000004306
+C             1.1235332342        7.9106074549        6.9999976008
+C             9.5599662817        7.9135760851        6.9999944322
+C             0.7124952305        6.5148552343        7.0000011775
+C             9.9689562193        6.5209115373        6.9999999749
+H             2.5428284850        5.3368452632        7.0000027970
+H             8.1373231248        5.3428747556        7.0000004377
+C             1.4544182599        5.3373359093        7.0000034183
+C             9.2257267141        5.3423559599        7.0000023510
+C             9.9675858812        4.1648407947        7.0000035301
+C             0.7110698807        4.1588269961        7.0000047869
+C             9.5564907366        2.7691999024        6.9999996855
+C             1.1199435250        2.7663019618        7.0000029627
+H             5.3367654492        2.5429713818        7.0000028631
+N             8.2841805159        2.3958143138        6.9999994470
+N             2.3907864326        2.3909645854        7.0000066816
+N            -0.0019341805        1.9582931779        6.9999978112
+C             5.3371799114        1.4545433584        7.0000034156
+C             7.9104306162        1.1236366518        6.9999976475
+C             2.7661287954        1.1201089747        7.0000030215
+C             6.5146861533        0.7126145218        7.0000011765
+C             4.1586591402        0.7112504824        7.0000048098
+N             1.9581203592       -0.0017597686        6.9999978439
+N             8.7159994569        0.0046525476        6.9999932729
+
+K_POINTS (automatic)
+4 4 2 0 0 0
+ 
